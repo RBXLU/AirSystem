@@ -277,7 +277,7 @@ def sheet(model: Model, name: str, texture: Image.Image | None = None,
         (0.0, 0.0, "front"),
         (180.0, 89.9, "plan"),
     )
-    tiles = [render_view(model, az, el, size=tile, title=f"{name} — {label}", texture=texture)
+    tiles = [render_view(model, az, el, size=tile, title=f"{name} / {label}", texture=texture)
              for az, el, label in views]
     canvas = Image.new("RGB", (tile[0] * 2, tile[1] * 2), tuple(BACKGROUND.astype(int)))
     for index, image in enumerate(tiles):
