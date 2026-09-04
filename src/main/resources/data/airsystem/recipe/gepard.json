@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "NGN",
+    "IFI",
+    "III"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "G": {
+      "item": "airsystem:guidance_module"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "F": {
+      "item": "airsystem:drone_frame"
+    }
+  },
+  "result": {
+    "id": "airsystem:gepard",
+    "count": 1
+  }
+}

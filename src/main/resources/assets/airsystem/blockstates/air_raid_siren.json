@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "active=false,facing=north": {
+      "model": "airsystem:block/air_raid_siren"
+    },
+    "active=true,facing=north": {
+      "model": "airsystem:block/air_raid_siren_on"
+    },
+    "active=false,facing=east": {
+      "model": "airsystem:block/air_raid_siren",
+      "y": 90
+    },
+    "active=true,facing=east": {
+      "model": "airsystem:block/air_raid_siren_on",
+      "y": 90
+    },
+    "active=false,facing=south": {
+      "model": "airsystem:block/air_raid_siren",
+      "y": 180
+    },
+    "active=true,facing=south": {
+      "model": "airsystem:block/air_raid_siren_on",
+      "y": 180
+    },
+    "active=false,facing=west": {
+      "model": "airsystem:block/air_raid_siren",
+      "y": 270
+    },
+    "active=true,facing=west": {
+      "model": "airsystem:block/air_raid_siren_on",
+      "y": 270
+    }
+  }
+}

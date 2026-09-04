@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G ",
+    "GIG",
+    " I "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "id": "airsystem:ammo_35mm",
+    "count": 8
+  }
+}

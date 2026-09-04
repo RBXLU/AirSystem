@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G ",
+    "GIG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "id": "airsystem:ammo_30mm",
+    "count": 8
+  }
+}

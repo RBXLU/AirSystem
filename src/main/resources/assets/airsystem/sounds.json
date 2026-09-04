@@ -1,0 +1,200 @@
+{
+  "siren_alert": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "airsystem:siren_alert",
+        "stream": false
+      }
+    ]
+  },
+  "siren_all_clear": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "airsystem:siren_all_clear",
+        "stream": false
+      }
+    ]
+  },
+  "alarm_button_click": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "airsystem:alarm_button_click",
+        "stream": false
+      }
+    ]
+  },
+  "drone_piston": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:drone_piston",
+        "stream": false
+      }
+    ]
+  },
+  "drone_jet": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:drone_jet",
+        "stream": false
+      }
+    ]
+  },
+  "drone_electric": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:drone_electric",
+        "stream": false
+      }
+    ]
+  },
+  "drone_dive": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:drone_dive",
+        "stream": false
+      }
+    ]
+  },
+  "drone_launch": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:drone_launch",
+        "stream": false
+      }
+    ]
+  },
+  "engine_failure": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:engine_failure",
+        "stream": false
+      }
+    ]
+  },
+  "explosion_near": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "airsystem:explosion_near",
+        "stream": false
+      }
+    ]
+  },
+  "explosion_distant": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "airsystem:explosion_distant",
+        "stream": false
+      }
+    ]
+  },
+  "window_shatter": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "airsystem:window_shatter",
+        "stream": false
+      }
+    ]
+  },
+  "debris_fall": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "airsystem:debris_fall",
+        "stream": false
+      }
+    ]
+  },
+  "turret_fire_35": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:turret_fire_35",
+        "stream": false
+      }
+    ]
+  },
+  "turret_fire_30": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:turret_fire_30",
+        "stream": false
+      }
+    ]
+  },
+  "turret_traverse": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:turret_traverse",
+        "stream": false
+      }
+    ]
+  },
+  "turret_reload": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:turret_reload",
+        "stream": false
+      }
+    ]
+  },
+  "radar_lock": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "airsystem:radar_lock",
+        "stream": false
+      }
+    ]
+  },
+  "remote_beep": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "airsystem:remote_beep",
+        "stream": false
+      }
+    ]
+  },
+  "remote_error": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "airsystem:remote_error",
+        "stream": false
+      }
+    ]
+  },
+  "map_mark": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "airsystem:map_mark",
+        "stream": false
+      }
+    ]
+  },
+  "silence": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "airsystem:silence",
+        "stream": false
+      }
+    ]
+  }
+}

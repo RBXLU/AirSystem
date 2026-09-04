@@ -1,0 +1,19 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Run environment
+run/
+runs/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.eclipse/
+bin/
+
+# Python
+__pycache__/
+*.pyc
