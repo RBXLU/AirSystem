@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GDG",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "G": {
+      "item": "airsystem:guidance_module"
+    },
+    "D": {
+      "item": "minecraft:copper_block"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "id": "airsystem:radar",
+    "count": 1
+  }
+}

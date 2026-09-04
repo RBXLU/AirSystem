@@ -1,14 +1,9 @@
-package com.rbxlu.airsystem.content.alarm;
+package com.rbxlu.airsystem.content.radar;
 
 import com.mojang.serialization.MapCodec;
 import com.rbxlu.airsystem.registry.ModBlockEntities;
-import com.rbxlu.airsystem.registry.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -21,26 +16,22 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class AirRaidSirenBlock extends BaseEntityBlock {
-    public static final MapCodec<AirRaidSirenBlock> CODEC = simpleCodec(AirRaidSirenBlock::new);
+public class RadarBlock extends BaseEntityBlock {
+    public static final MapCodec<RadarBlock> CODEC = simpleCodec(RadarBlock::new);
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
-    private static final VoxelShape SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+    private static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 13.0D, 15.0D);
 
-    public AirRaidSirenBlock(Properties properties) {
+    public RadarBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, net.minecraft.core.Direction.NORTH)
-                .setValue(ACTIVE, false));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -50,7 +41,7 @@ public class AirRaidSirenBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, ACTIVE);
+        builder.add(FACING);
     }
 
     @Nullable
@@ -66,13 +57,13 @@ public class AirRaidSirenBlock extends BaseEntityBlock {
 
     @Override
     protected RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
+        return RenderShape.INVISIBLE;
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new AirRaidSirenBlockEntity(pos, state);
+        return new RadarBlockEntity(pos, state);
     }
 
     @Nullable
@@ -82,29 +73,7 @@ public class AirRaidSirenBlock extends BaseEntityBlock {
         if (level.isClientSide) {
             return null;
         }
-        return createTickerHelper(type, ModBlockEntities.AIR_RAID_SIREN.get(),
+        return createTickerHelper(type, ModBlockEntities.RADAR.get(),
                 (world, pos, blockState, blockEntity) -> blockEntity.serverTick());
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
-                                              Player player, InteractionHand hand, BlockHitResult hit) {
-        // A block action runs before the held item, so without this the cable never
-        // reaches its own useOn and the click just works the block instead.
-        return stack.is(ModItems.LINKING_CABLE.get())
-                ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION
-                : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
-                                               BlockHitResult hit) {
-        if (level.isClientSide) {
-            return InteractionResult.SUCCESS;
-        }
-        if (level.getBlockEntity(pos) instanceof AirRaidSirenBlockEntity siren) {
-            siren.toggle(player);
-        }
-        return InteractionResult.CONSUME;
     }
 }

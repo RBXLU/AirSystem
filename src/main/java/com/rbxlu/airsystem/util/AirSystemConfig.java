@@ -72,6 +72,14 @@ public final class AirSystemConfig {
                     + " 0 means it sounds until all-clear or a second press")
             .defineInRange("alarm.alertDuration", 90, 0, 3600);
 
+    private static final ModConfigSpec.IntValue RADAR_RANGE = BUILDER
+            .comment("Radar station detection range, in blocks")
+            .defineInRange("radar.range", 320, 64, 2048);
+
+    private static final ModConfigSpec.IntValue RADAR_SWEEP = BUILDER
+            .comment("Ticks between radar sweeps; contacts on the scope refresh this often")
+            .defineInRange("radar.sweepTicks", 20, 4, 200);
+
     public static final ModConfigSpec SPEC = BUILDER.build();
 
     public static final double SOUND_BLOCKS_PER_TICK = 17.0D;
@@ -144,6 +152,14 @@ public final class AirSystemConfig {
 
     public static int alertDurationTicks() {
         return (loaded ? ALERT_DURATION.get() : 90) * 20;
+    }
+
+    public static int radarRange() {
+        return loaded ? RADAR_RANGE.get() : 320;
+    }
+
+    public static int radarSweepTicks() {
+        return loaded ? RADAR_SWEEP.get() : 20;
     }
 
     private AirSystemConfig() {

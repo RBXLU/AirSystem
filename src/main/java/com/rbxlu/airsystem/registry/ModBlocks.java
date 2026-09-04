@@ -4,6 +4,8 @@ import com.rbxlu.airsystem.AirSystem;
 import com.rbxlu.airsystem.content.alarm.AirRaidSirenBlock;
 import com.rbxlu.airsystem.content.alarm.AlarmButtonBlock;
 import com.rbxlu.airsystem.content.drone.DroneBlock;
+import com.rbxlu.airsystem.content.radar.RadarBlock;
+import com.rbxlu.airsystem.content.radar.RadarScreenBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -41,6 +43,22 @@ public final class ModBlocks {
                     .noOcclusion()
                     .isViewBlocking((state, level, pos) -> false)
                     .pushReaction(net.minecraft.world.level.material.PushReaction.DESTROY)));
+
+    public static final DeferredHolder<Block, RadarBlock> RADAR = BLOCKS.register("radar",
+            () -> new RadarBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .strength(3.5F, 8.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()
+                    .isViewBlocking((state, level, pos) -> false)));
+
+    public static final DeferredHolder<Block, RadarScreenBlock> RADAR_SCREEN = BLOCKS.register("radar_screen",
+            () -> new RadarScreenBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(2.5F, 6.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()
+                    .lightLevel(state -> 6)));
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);

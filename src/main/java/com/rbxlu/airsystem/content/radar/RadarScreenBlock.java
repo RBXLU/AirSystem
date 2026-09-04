@@ -1,14 +1,14 @@
-package com.rbxlu.airsystem.content.alarm;
+package com.rbxlu.airsystem.content.radar;
 
 import com.mojang.serialization.MapCodec;
 import com.rbxlu.airsystem.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -27,17 +26,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class AlarmButtonBlock extends BaseEntityBlock {
-    public static final MapCodec<AlarmButtonBlock> CODEC = simpleCodec(AlarmButtonBlock::new);
+public class RadarScreenBlock extends BaseEntityBlock {
+    public static final MapCodec<RadarScreenBlock> CODEC = simpleCodec(RadarScreenBlock::new);
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty TRIGGERED = BooleanProperty.create("triggered");
 
-    private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+    private static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
 
-    public AlarmButtonBlock(Properties properties) {
+    public RadarScreenBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(TRIGGERED, false));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -47,7 +45,7 @@ public class AlarmButtonBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, TRIGGERED);
+        builder.add(FACING);
     }
 
     @Nullable
@@ -69,7 +67,7 @@ public class AlarmButtonBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new AlarmButtonBlockEntity(pos, state);
+        return new RadarScreenBlockEntity(pos, state);
     }
 
     @Override
@@ -85,12 +83,14 @@ public class AlarmButtonBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
                                                BlockHitResult hit) {
+        if (!(level.getBlockEntity(pos) instanceof RadarScreenBlockEntity)) {
+            return InteractionResult.PASS;
+        }
+        // Which stations are linked is server-side state, so the scope opens either way
+        // and reports an empty link list itself.
         if (level.isClientSide) {
-            return InteractionResult.SUCCESS;
+            com.rbxlu.airsystem.client.ClientHooks.openRadarScreen(pos);
         }
-        if (level.getBlockEntity(pos) instanceof AlarmButtonBlockEntity button) {
-            button.press(player);
-        }
-        return InteractionResult.CONSUME;
+        return InteractionResult.SUCCESS;
     }
 }

@@ -55,6 +55,10 @@ public final class ModItems {
             () -> new BlockItem(ModBlocks.AIR_RAID_SIREN.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> ALARM_BUTTON = ITEMS.register("alarm_button",
             () -> new BlockItem(ModBlocks.ALARM_BUTTON.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> RADAR = ITEMS.register("radar",
+            () -> new BlockItem(ModBlocks.RADAR.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> RADAR_SCREEN = ITEMS.register("radar_screen",
+            () -> new BlockItem(ModBlocks.RADAR_SCREEN.get(), new Item.Properties()));
 
     static {
         for (DroneKind kind : DroneKind.values()) {

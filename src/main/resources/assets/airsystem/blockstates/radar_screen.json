@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "airsystem:block/radar_screen"
+    },
+    "facing=east": {
+      "model": "airsystem:block/radar_screen",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "airsystem:block/radar_screen",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "airsystem:block/radar_screen",
+      "y": 270
+    }
+  }
+}

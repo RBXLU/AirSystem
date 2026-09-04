@@ -4,6 +4,8 @@ import com.rbxlu.airsystem.AirSystem;
 import com.rbxlu.airsystem.content.alarm.AirRaidSirenBlockEntity;
 import com.rbxlu.airsystem.content.alarm.AlarmButtonBlockEntity;
 import com.rbxlu.airsystem.content.drone.DroneBlockEntity;
+import com.rbxlu.airsystem.content.radar.RadarBlockEntity;
+import com.rbxlu.airsystem.content.radar.RadarScreenBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -27,6 +29,16 @@ public final class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DroneBlockEntity>> DRONE =
             BLOCK_ENTITIES.register("drone", () -> BlockEntityType.Builder
                     .of(DroneBlockEntity::new, ModBlocks.DRONE.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RadarBlockEntity>> RADAR =
+            BLOCK_ENTITIES.register("radar", () -> BlockEntityType.Builder
+                    .of(RadarBlockEntity::new, ModBlocks.RADAR.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RadarScreenBlockEntity>> RADAR_SCREEN =
+            BLOCK_ENTITIES.register("radar_screen", () -> BlockEntityType.Builder
+                    .of(RadarScreenBlockEntity::new, ModBlocks.RADAR_SCREEN.get())
                     .build(null));
 
     public static void register(IEventBus bus) {

@@ -8,10 +8,12 @@ import com.rbxlu.airsystem.client.handler.PendingFeed;
 import com.rbxlu.airsystem.client.handler.ScreenShakeHandler;
 import com.rbxlu.airsystem.client.handler.TracerRenderer;
 import com.rbxlu.airsystem.client.model.DroneLayers;
+import com.rbxlu.airsystem.client.model.RadarLayers;
 import com.rbxlu.airsystem.client.model.ModModelLayers;
 import com.rbxlu.airsystem.client.model.TurretLayers;
 import com.rbxlu.airsystem.client.renderer.DroneBlockRenderer;
 import com.rbxlu.airsystem.client.renderer.DroneFlightRenderer;
+import com.rbxlu.airsystem.client.renderer.RadarRenderer;
 import com.rbxlu.airsystem.client.renderer.TurretRenderer;
 import com.rbxlu.airsystem.client.screen.DroneFeedScreen;
 import com.rbxlu.airsystem.content.drone.DroneKind;
@@ -60,6 +62,7 @@ public class AirSystemClient {
             event.registerLayerDefinition(ModModelLayers.turret(kind), () -> TurretLayers.create(kind));
         }
         event.registerLayerDefinition(ModModelLayers.AERIAL_BOMB, DroneLayers::createAerialBomb);
+        event.registerLayerDefinition(ModModelLayers.RADAR, RadarLayers::createRadar);
     }
 
     private static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -68,6 +71,7 @@ public class AirSystemClient {
                     context -> new TurretRenderer(context, kind));
         }
         event.registerBlockEntityRenderer(ModBlockEntities.DRONE.get(), DroneBlockRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.RADAR.get(), RadarRenderer::new);
     }
 
     private static void registerGuiLayers(RegisterGuiLayersEvent event) {

@@ -9,6 +9,8 @@ import com.rbxlu.airsystem.network.payload.DroneRemovePayload;
 import com.rbxlu.airsystem.network.payload.DroneSyncPayload;
 import com.rbxlu.airsystem.network.payload.DroneTelemetryPayload;
 import com.rbxlu.airsystem.network.payload.ImpactPayload;
+import com.rbxlu.airsystem.network.payload.RadarContactsPayload;
+import com.rbxlu.airsystem.network.payload.RadarQueryPayload;
 import com.rbxlu.airsystem.network.payload.RemoteActionPayload;
 import com.rbxlu.airsystem.network.payload.TracerPayload;
 import com.rbxlu.airsystem.network.payload.TurretInputPayload;
@@ -36,6 +38,11 @@ public final class ModNetwork {
         registrar.playToClient(TracerPayload.TYPE, TracerPayload.STREAM_CODEC,
                 (payload, context) -> com.rbxlu.airsystem.client.ClientPayloadHandler.handleTracer(payload, context));
 
+        registrar.playToClient(RadarContactsPayload.TYPE, RadarContactsPayload.STREAM_CODEC,
+                (payload, context) -> com.rbxlu.airsystem.client.ClientPayloadHandler.handleRadar(payload, context));
+
+        registrar.playToServer(RadarQueryPayload.TYPE, RadarQueryPayload.STREAM_CODEC,
+                ServerPayloadHandler::handleRadarQuery);
         registrar.playToServer(DroneInputPayload.TYPE, DroneInputPayload.STREAM_CODEC,
                 ServerPayloadHandler::handleDroneInput);
         registrar.playToServer(DroneCommandPayload.TYPE, DroneCommandPayload.STREAM_CODEC,

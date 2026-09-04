@@ -2,6 +2,8 @@ package com.rbxlu.airsystem.content.item;
 
 import com.rbxlu.airsystem.content.alarm.AlarmButtonBlockEntity;
 import com.rbxlu.airsystem.content.alarm.AirRaidSirenBlockEntity;
+import com.rbxlu.airsystem.content.radar.RadarBlockEntity;
+import com.rbxlu.airsystem.content.radar.RadarScreenBlockEntity;
 import com.rbxlu.airsystem.registry.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -39,6 +41,31 @@ public class LinkingCableItem extends Item {
             stack.set(ModDataComponents.LINK_SOURCE.get(), pos);
             player.displayClientMessage(Component.translatable("message.airsystem.cable.siren_selected",
                     pos.getX(), pos.getY(), pos.getZ()).withStyle(ChatFormatting.AQUA), true);
+            return InteractionResult.CONSUME;
+        }
+
+        if (blockEntity instanceof RadarBlockEntity) {
+            stack.set(ModDataComponents.LINK_SOURCE.get(), pos);
+            player.displayClientMessage(Component.translatable("message.airsystem.cable.radar_selected",
+                    pos.getX(), pos.getY(), pos.getZ()).withStyle(ChatFormatting.AQUA), true);
+            return InteractionResult.CONSUME;
+        }
+
+        if (blockEntity instanceof RadarScreenBlockEntity screen) {
+            BlockPos radar = stack.get(ModDataComponents.LINK_SOURCE.get());
+            if (radar == null || !(level.getBlockEntity(radar) instanceof RadarBlockEntity)) {
+                player.displayClientMessage(Component.translatable("message.airsystem.cable.no_radar")
+                        .withStyle(ChatFormatting.RED), true);
+                stack.remove(ModDataComponents.LINK_SOURCE.get());
+                return InteractionResult.CONSUME;
+            }
+
+            boolean added = screen.toggleStation(radar);
+            stack.remove(ModDataComponents.LINK_SOURCE.get());
+            player.displayClientMessage(Component.translatable(added
+                            ? "message.airsystem.cable.radar_linked"
+                            : "message.airsystem.cable.radar_unlinked",
+                    screen.stations().size()).withStyle(ChatFormatting.GREEN), true);
             return InteractionResult.CONSUME;
         }
 

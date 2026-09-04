@@ -11,6 +11,9 @@ import com.rbxlu.airsystem.content.item.WorldMapItem;
 import com.rbxlu.airsystem.content.turret.TurretEntity;
 import com.rbxlu.airsystem.network.payload.DroneCommandPayload;
 import com.rbxlu.airsystem.network.payload.DroneInputPayload;
+import com.rbxlu.airsystem.content.radar.RadarScreenBlockEntity;
+import com.rbxlu.airsystem.network.payload.RadarContactsPayload;
+import com.rbxlu.airsystem.network.payload.RadarQueryPayload;
 import com.rbxlu.airsystem.network.payload.RemoteActionPayload;
 import com.rbxlu.airsystem.network.payload.TurretInputPayload;
 import com.rbxlu.airsystem.registry.ModDataComponents;
@@ -32,6 +35,26 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public final class ServerPayloadHandler {
+    private static final double SCREEN_REACH = 12.0D;
+
+    public static void handleRadarQuery(RadarQueryPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (!(context.player() instanceof ServerPlayer player)) {
+                return;
+            }
+            BlockPos pos = payload.screen();
+            if (player.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D)
+                    > SCREEN_REACH * SCREEN_REACH) {
+                return;
+            }
+            if (!(player.level().getBlockEntity(pos) instanceof RadarScreenBlockEntity screen)) {
+                return;
+            }
+            player.connection.send(new RadarContactsPayload(screen.origin(),
+                    AirSystemConfig.radarRange(), screen.stations().size(), screen.contacts()));
+        });
+    }
+
     public static void handleDroneInput(DroneInputPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (!(context.player() instanceof ServerPlayer player)) {

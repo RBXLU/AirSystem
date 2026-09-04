@@ -14,6 +14,7 @@ public final class ModModelLayers {
     private static final Map<TurretKind, ModelLayerLocation> TURRETS = new EnumMap<>(TurretKind.class);
 
     public static final ModelLayerLocation AERIAL_BOMB = create("aerial_bomb");
+    public static final ModelLayerLocation RADAR = create("radar");
 
     static {
         for (DroneKind kind : DroneKind.values()) {

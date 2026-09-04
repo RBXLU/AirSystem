@@ -78,6 +78,22 @@ individual mount.
 
 Players within earshot get an "AIR RAID ALERT" banner on screen.
 
+### Radar
+
+* **Radar station** — a masted dish that sweeps for airborne drones out to 320
+  blocks. Terrain masks the beam, so a contact behind a ridge is not on the
+  scope until it clears the skyline.
+* **Radar scope** — a console showing a plan position indicator: range rings,
+  contacts with their course, and a track list with bearing, range, altitude
+  and speed.
+
+Bind a station to a scope with the linking cable — click the station, then the
+scope. One scope takes several stations and merges their coverage.
+
+The scope names a contact only when it is friendly by the same launch-point rule
+the guns use. Anything launched further out shows as a size class alone, which
+is what a radar return actually tells you.
+
 ---
 
 ## How it works
@@ -302,8 +318,8 @@ Every numeric parameter lives in the common config
 (`config/airsystem-common.toml`): flight time and cruise altitude, engine
 failure chance, remote link range, chunk loading and view radii, the cap on
 simultaneous flights, shake and audibility radii, shockwave travel time, the IFF
-radius and the base automatic hit chance, plus switches for glass breaking and
-fires.
+radius and the base automatic hit chance, radar range and sweep period, plus
+switches for glass breaking and fires.
 
 ---
 
