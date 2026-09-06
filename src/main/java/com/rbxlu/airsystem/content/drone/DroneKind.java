@@ -50,7 +50,31 @@ public enum DroneKind {
     UJ_22("uj_22", Role.KAMIKAZE, 3.4F, 4.0F, 1.25F, 0.035F, 240,
             3, 5.0F, false, 30, EngineSound.PISTON, 0x5C6154),
     RAM_II("ram_ii", Role.KAMIKAZE, 1.7F, 2.0F, 1.35F, 0.055F, 200,
-            2, 3.5F, true, 22, EngineSound.ELECTRIC, 0x707A62);
+            2, 3.5F, true, 22, EngineSound.ELECTRIC, 0x707A62),
+
+    SHAHED_101("shahed_101", Role.KAMIKAZE, 2.6F, 2.4F, 1.00F, 0.038F, 200,
+            2, 3.5F, false, 22, EngineSound.PISTON, 0xC0B48E),
+    SHAHED_107("shahed_107", Role.KAMIKAZE, 2.2F, 2.0F, 0.95F, 0.042F, 190,
+            2, 3.0F, false, 20, EngineSound.PISTON, 0xBCB08A),
+    SHAHED_129("shahed_129", Role.STRIKE, 6.0F, 9.0F, 1.15F, 0.032F, 300,
+            4, 0.0F, false, 0, EngineSound.PISTON, 0xCBC7B4),
+    BAYRAKTAR_TB2("bayraktar_tb2", Role.STRIKE, 5.0F, 8.5F, 1.20F, 0.034F, 300,
+            4, 0.0F, false, 0, EngineSound.PISTON, 0xE6E4DC),
+    BOBER("bober", Role.KAMIKAZE, 2.6F, 3.0F, 1.25F, 0.050F, 220,
+            2, 4.0F, false, 24, EngineSound.PISTON, 0x6B5F45),
+    FURIA("furia", Role.RECON, 1.6F, 2.4F, 0.95F, 0.058F, 220,
+            2, 0.0F, false, 0, EngineSound.ELECTRIC, 0x8C9478),
+    SUPERCAM_S350("supercam_s350", Role.RECON, 1.4F, 2.4F, 0.90F, 0.055F, 240,
+            2, 0.0F, false, 0, EngineSound.ELECTRIC, 0xD6D6CC),
+
+    FPV_7("fpv_7", Role.KAMIKAZE, 0.9F, 1.0F, 1.55F, 0.075F, 120,
+            1, 2.5F, false, 12, EngineSound.ELECTRIC, 0x454A52),
+    FPV_10("fpv_10", Role.KAMIKAZE, 1.2F, 1.4F, 1.45F, 0.070F, 140,
+            1, 3.2F, false, 16, EngineSound.ELECTRIC, 0x4E535B),
+    FPV_SCOUT("fpv_scout", Role.RECON, 0.8F, 0.9F, 1.30F, 0.080F, 120,
+            1, 0.0F, false, 0, EngineSound.ELECTRIC, 0x606770),
+    VAMPIRE("vampire", Role.STRIKE, 2.2F, 2.6F, 0.80F, 0.060F, 140,
+            3, 0.0F, false, 0, EngineSound.ELECTRIC, 0x3A3E44);
 
     public enum Role {
         RECON,

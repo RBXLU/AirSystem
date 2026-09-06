@@ -29,7 +29,8 @@ public class DroneModel {
             propeller.zRot = spin;
         }
         if (rotor != null) {
-            rotor.zRot = spin;
+            // A lift rotor turns in the horizontal plane, unlike a pusher propeller.
+            rotor.yRot = spin;
         }
 
         if (state.isAirborne()) {
