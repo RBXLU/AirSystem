@@ -27,6 +27,8 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.ALARM_BUTTON.get());
                         output.accept(ModItems.RADAR.get());
                         output.accept(ModItems.RADAR_SCREEN.get());
+                        output.accept(ModItems.NET_MOUNT.get());
+                        output.accept(ModItems.DRONE_NET.get());
 
                         for (DroneKind kind : DroneKind.values()) {
                             output.accept(ModItems.droneItem(kind).get());

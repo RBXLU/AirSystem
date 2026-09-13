@@ -99,6 +99,17 @@ The scope names a contact only when it is friendly by the same launch-point rule
 the guns use. Anything launched further out shows as a size class alone, which
 is what a radar return actually tells you.
 
+### Anti-drone netting
+
+* **Net mount** — the post a run of netting hangs from.
+* **Anti-drone net** — a panel that only survives while it reaches a mount, so cut
+  the mount out and the whole run comes down.
+
+Netting stops what it was strung up for and nothing else. An FPV or any airframe
+under 2.4 blocks of span tangles and drops without its warhead going off, and the
+panel survives to catch the next one. Anything heavier tears the panel out and
+flies on.
+
 ---
 
 ## How it works

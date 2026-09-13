@@ -11,12 +11,14 @@ public final class BlastOverlay implements LayeredDraw.Layer {
     public static final BlastOverlay INSTANCE = new BlastOverlay();
 
     private static float intensity;
+    private static int flicker;
     private static float previousIntensity;
     private static float punch;
     private static float previousPunch;
 
     public static void flash(float value) {
         intensity = Math.min(1.0F, Math.max(intensity, value));
+        flicker = value > 0.25F ? 5 : 0;
         punch = Math.min(0.22F, Math.max(punch, value * 0.18F));
     }
 
@@ -25,6 +27,14 @@ public final class BlastOverlay implements LayeredDraw.Layer {
         previousPunch = punch;
 
         intensity *= intensity > 0.35F ? 0.55F : 0.80F;
+        // Two quick relights while the fireball is still burning: a detonation does not
+        // fade evenly, and the flicker is most of what sells it as light rather than a wash.
+        if (flicker > 0) {
+            flicker--;
+            if (flicker % 2 == 0) {
+                intensity = Math.min(1.0F, intensity * 1.9F);
+            }
+        }
         punch *= 0.72F;
         if (intensity < 0.004F) {
             intensity = 0.0F;
@@ -35,6 +45,7 @@ public final class BlastOverlay implements LayeredDraw.Layer {
     }
 
     public static void clear() {
+        flicker = 0;
         intensity = 0.0F;
         previousIntensity = 0.0F;
         punch = 0.0F;

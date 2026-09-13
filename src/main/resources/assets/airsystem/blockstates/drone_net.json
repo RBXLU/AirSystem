@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "airsystem:block/drone_net_z"
+    },
+    "axis=z": {
+      "model": "airsystem:block/drone_net_x"
+    }
+  }
+}

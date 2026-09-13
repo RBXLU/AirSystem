@@ -54,14 +54,13 @@ public final class DroneLayers {
                         .texOffs(38, 151).addBox(-2.0F, -5.0F, -22.0F, 4.0F, 4.0F, 3.0F)
                         .texOffs(193, 138).addBox(-3.0F, -6.0F, -19.0F, 6.0F, 5.0F, 3.0F)
                         .texOffs(149, 151).addBox(-0.5F, -4.0F, -28.0F, 1.0F, 1.0F, 4.0F)
-                        .texOffs(0, 159).addBox(-9.0F, -5.0F, -13.0F, 18.0F, 1.0F, 2.0F)
                         .texOffs(212, 138).addBox(-4.0F, -6.0F, -3.0F, 1.0F, 2.0F, 6.0F)
                         .texOffs(39, 119).addBox(-3.5F, -8.0F, 12.0F, 7.0F, 4.0F, 14.0F)
                         .texOffs(160, 151).addBox(2.5F, -7.0F, 13.0F, 1.0F, 2.0F, 3.0F)
                         .texOffs(169, 151).addBox(-3.5F, -7.0F, 13.0F, 1.0F, 2.0F, 3.0F)
                         .texOffs(215, 151).addBox(-1.0F, -4.0F, 23.0F, 2.0F, 1.0F, 3.0F)
                         .texOffs(226, 151).addBox(-0.5F, -11.0F, -1.1F, 1.0F, 3.0F, 1.0F)
-                        .texOffs(41, 159).addBox(-2.0F, -7.0F, 17.0F, 4.0F, 2.0F, 1.0F),
+                        .texOffs(0, 159).addBox(-2.0F, -7.0F, 17.0F, 4.0F, 2.0F, 1.0F),
                 PartPose.offset(0.0F, -3.0F, 0.0F));
 
         body.addOrReplaceChild("body_r0",
@@ -86,8 +85,8 @@ public final class DroneLayers {
 
         PartDefinition propeller = body.addOrReplaceChild("propeller",
                 CubeListBuilder.create()
-                        .texOffs(52, 159).addBox(-4.0F, -1.0F, 0.0F, 8.0F, 2.0F, 1.0F)
-                        .texOffs(71, 159).addBox(-8.0F, 0.0F, 0.0F, 16.0F, 1.0F, 1.0F)
+                        .texOffs(11, 159).addBox(-4.0F, -1.0F, 0.0F, 8.0F, 2.0F, 1.0F)
+                        .texOffs(30, 159).addBox(-8.0F, 0.0F, 0.0F, 16.0F, 1.0F, 1.0F)
                         .texOffs(178, 151).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 2.0F),
                 PartPose.offset(-0.0F, -6.0F, 26.0F));
 
@@ -138,14 +137,13 @@ public final class DroneLayers {
                         .texOffs(126, 180).addBox(-2.0F, -6.0F, -27.0F, 4.0F, 4.0F, 4.0F)
                         .texOffs(0, 180).addBox(-3.0F, -7.0F, -23.0F, 6.0F, 6.0F, 4.0F)
                         .texOffs(38, 191).addBox(-0.5F, -4.0F, -34.0F, 1.0F, 1.0F, 5.0F)
-                        .texOffs(148, 191).addBox(-9.0F, -5.0F, -16.0F, 18.0F, 1.0F, 2.0F)
                         .texOffs(67, 180).addBox(-4.0F, -6.0F, -4.0F, 1.0F, 2.0F, 7.0F)
                         .texOffs(90, 142).addBox(-3.5F, -9.0F, 15.0F, 7.0F, 5.0F, 16.0F)
                         .texOffs(51, 191).addBox(2.5F, -8.0F, 16.0F, 1.0F, 3.0F, 3.0F)
                         .texOffs(60, 191).addBox(-3.5F, -8.0F, 16.0F, 1.0F, 3.0F, 3.0F)
                         .texOffs(110, 191).addBox(-1.0F, -4.0F, 28.0F, 2.0F, 1.0F, 3.0F)
                         .texOffs(121, 191).addBox(-0.5F, -12.4F, -1.3F, 1.0F, 3.0F, 1.0F)
-                        .texOffs(189, 191).addBox(-2.0F, -7.0F, 20.0F, 4.0F, 2.0F, 1.0F),
+                        .texOffs(148, 191).addBox(-2.0F, -7.0F, 20.0F, 4.0F, 2.0F, 1.0F),
                 PartPose.offset(0.0F, -3.0F, 0.0F));
 
         body.addOrReplaceChild("body_r0",
@@ -170,8 +168,8 @@ public final class DroneLayers {
 
         PartDefinition propeller = body.addOrReplaceChild("propeller",
                 CubeListBuilder.create()
-                        .texOffs(200, 191).addBox(-4.0F, -1.0F, 0.0F, 8.0F, 2.0F, 1.0F)
-                        .texOffs(219, 191).addBox(-8.0F, 0.0F, 0.0F, 16.0F, 1.0F, 1.0F)
+                        .texOffs(159, 191).addBox(-4.0F, -1.0F, 0.0F, 8.0F, 2.0F, 1.0F)
+                        .texOffs(178, 191).addBox(-8.0F, 0.0F, 0.0F, 16.0F, 1.0F, 1.0F)
                         .texOffs(99, 191).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 2.0F),
                 PartPose.offset(-0.0F, -7.0F, 31.0F));
 
@@ -222,14 +220,13 @@ public final class DroneLayers {
                         .texOffs(149, 185).addBox(-2.0F, -6.0F, -27.0F, 4.0F, 4.0F, 4.0F)
                         .texOffs(23, 185).addBox(-3.0F, -7.0F, -23.0F, 6.0F, 6.0F, 4.0F)
                         .texOffs(68, 196).addBox(-0.5F, -4.0F, -34.0F, 1.0F, 1.0F, 5.0F)
-                        .texOffs(170, 196).addBox(-9.0F, -5.0F, -16.0F, 18.0F, 1.0F, 2.0F)
                         .texOffs(90, 185).addBox(-4.0F, -6.0F, -4.0F, 1.0F, 2.0F, 7.0F)
                         .texOffs(130, 109).addBox(-3.3F, -9.4F, 6.7F, 7.0F, 6.0F, 22.0F)
                         .texOffs(81, 196).addBox(-2.3F, -8.4F, 27.2F, 5.0F, 4.0F, 2.0F)
                         .texOffs(126, 196).addBox(-2.3F, -8.4F, 5.7F, 5.0F, 4.0F, 1.0F)
                         .texOffs(217, 185).addBox(-2.5F, -9.0F, 30.0F, 5.0F, 5.0F, 2.0F)
                         .texOffs(139, 196).addBox(-1.5F, -8.0F, 31.0F, 3.0F, 3.0F, 1.0F)
-                        .texOffs(211, 196).addBox(-2.6F, -11.0F, -1.0F, 5.0F, 2.0F, 1.0F),
+                        .texOffs(170, 196).addBox(-2.6F, -11.0F, -1.0F, 5.0F, 2.0F, 1.0F),
                 PartPose.offset(0.0F, -3.0F, 0.0F));
 
         body.addOrReplaceChild("body_r0",
@@ -733,7 +730,6 @@ public final class DroneLayers {
                         .texOffs(11, 8).addBox(-1.0F, -3.0F, -8.0F, 2.0F, 2.0F, 2.0F)
                         .texOffs(52, 0).addBox(-1.5F, -3.0F, -6.0F, 3.0F, 3.0F, 2.0F)
                         .texOffs(48, 27).addBox(-1.0F, -1.0F, -9.3F, 2.0F, 1.0F, 1.0F)
-                        .texOffs(18, 14).addBox(-1.5F, -4.0F, -4.0F, 3.0F, 1.0F, 2.0F)
                         .texOffs(20, 8).addBox(-1.0F, -2.0F, 0.0F, 1.0F, 2.0F, 2.0F)
                         .texOffs(27, 8).addBox(-1.5F, -2.0F, 6.0F, 3.0F, 2.0F, 2.0F)
                         .texOffs(38, 8).addBox(0.5F, -2.0F, 7.0F, 1.0F, 1.0F, 3.0F)
@@ -743,7 +739,7 @@ public final class DroneLayers {
 
         body.addOrReplaceChild("body_r0",
                 CubeListBuilder.create()
-                        .texOffs(29, 14).addBox(-6.2F, 0.0F, -0.5F, 12.0F, 1.0F, 2.0F),
+                        .texOffs(18, 14).addBox(-6.2F, 0.0F, -0.5F, 12.0F, 1.0F, 2.0F),
                 PartPose.offsetAndRotation(-0.0F, -1.5F, -3.5F, -0.0000F, -0.0000F, 0.7854F));
 
         body.addOrReplaceChild("body_r1",
@@ -784,8 +780,7 @@ public final class DroneLayers {
                         .texOffs(20, 19).addBox(-1.0F, -3.0F, -13.0F, 2.0F, 2.0F, 2.0F)
                         .texOffs(47, 10).addBox(-1.5F, -4.0F, -11.0F, 3.0F, 3.0F, 2.0F)
                         .texOffs(17, 10).addBox(-2.0F, -4.0F, -9.0F, 4.0F, 4.0F, 3.0F)
-                        .texOffs(44, 45).addBox(-1.0F, -2.0F, -13.6F, 2.0F, 1.0F, 1.0F)
-                        .texOffs(20, 45).addBox(-2.0F, -5.0F, -5.0F, 4.0F, 1.0F, 2.0F)
+                        .texOffs(31, 45).addBox(-1.0F, -2.0F, -13.6F, 2.0F, 1.0F, 1.0F)
                         .texOffs(0, 19).addBox(-2.0F, -3.0F, 1.0F, 1.0F, 2.0F, 3.0F)
                         .texOffs(32, 10).addBox(-2.0F, -3.0F, 8.0F, 4.0F, 3.0F, 3.0F)
                         .texOffs(51, 40).addBox(1.0F, -2.0F, 9.0F, 1.0F, 1.0F, 3.0F)
@@ -815,8 +810,8 @@ public final class DroneLayers {
 
         PartDefinition propeller = body.addOrReplaceChild("propeller",
                 CubeListBuilder.create()
-                        .texOffs(33, 45).addBox(-2.0F, -1.0F, 0.0F, 4.0F, 2.0F, 1.0F)
-                        .texOffs(0, 50).addBox(-5.0F, 0.0F, 0.0F, 10.0F, 1.0F, 1.0F)
+                        .texOffs(20, 45).addBox(-2.0F, -1.0F, 0.0F, 4.0F, 2.0F, 1.0F)
+                        .texOffs(38, 45).addBox(-5.0F, 0.0F, 0.0F, 10.0F, 1.0F, 1.0F)
                         .texOffs(9, 19).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 2.0F),
                 PartPose.offset(-0.0F, -2.0F, 12.0F));
 
@@ -1472,14 +1467,13 @@ public final class DroneLayers {
                         .texOffs(94, 75).addBox(-1.5F, -5.0F, -17.0F, 3.0F, 3.0F, 3.0F)
                         .texOffs(107, 75).addBox(-2.0F, -5.0F, -14.0F, 4.0F, 4.0F, 2.0F)
                         .texOffs(0, 84).addBox(-0.5F, -4.0F, -21.0F, 1.0F, 1.0F, 4.0F)
-                        .texOffs(127, 84).addBox(-6.8F, -5.0F, -10.0F, 14.0F, 1.0F, 2.0F)
                         .texOffs(120, 75).addBox(-3.0F, -6.0F, -2.0F, 1.0F, 2.0F, 4.0F)
                         .texOffs(58, 60).addBox(-2.5F, -7.0F, 9.0F, 5.0F, 3.0F, 10.0F)
                         .texOffs(53, 84).addBox(1.5F, -6.0F, 10.0F, 1.0F, 1.0F, 3.0F)
                         .texOffs(62, 84).addBox(-2.5F, -6.0F, 10.0F, 1.0F, 1.0F, 3.0F)
                         .texOffs(71, 84).addBox(-1.0F, -4.0F, 16.0F, 2.0F, 1.0F, 3.0F)
                         .texOffs(82, 84).addBox(-0.5F, -9.7F, -0.8F, 1.0F, 3.0F, 1.0F)
-                        .texOffs(160, 84).addBox(-1.4F, -7.0F, 12.0F, 3.0F, 2.0F, 1.0F),
+                        .texOffs(127, 84).addBox(-1.4F, -7.0F, 12.0F, 3.0F, 2.0F, 1.0F),
                 PartPose.offset(0.0F, -3.0F, 0.0F));
 
         body.addOrReplaceChild("body_r0",
@@ -1504,8 +1498,8 @@ public final class DroneLayers {
 
         PartDefinition propeller = body.addOrReplaceChild("propeller",
                 CubeListBuilder.create()
-                        .texOffs(169, 84).addBox(-3.0F, -1.0F, 0.0F, 6.0F, 2.0F, 1.0F)
-                        .texOffs(184, 84).addBox(-7.0F, 0.0F, 0.0F, 14.0F, 1.0F, 1.0F)
+                        .texOffs(136, 84).addBox(-3.0F, -1.0F, 0.0F, 6.0F, 2.0F, 1.0F)
+                        .texOffs(151, 84).addBox(-7.0F, 0.0F, 0.0F, 14.0F, 1.0F, 1.0F)
                         .texOffs(11, 84).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 2.0F),
                 PartPose.offset(-0.0F, -5.0F, 19.0F));
 
@@ -1684,50 +1678,57 @@ public final class DroneLayers {
                         .texOffs(0, 47).addBox(-8.0F, -16.9F, -24.0F, 16.0F, 17.0F, 11.0F)
                         .texOffs(186, 0).addBox(-8.0F, -16.9F, -13.0F, 16.0F, 17.0F, 12.0F)
                         .texOffs(98, 47).addBox(-5.0F, -13.6F, -1.0F, 10.0F, 11.0F, 11.0F)
-                        .texOffs(145, 123).addBox(-2.5F, -11.0F, -40.0F, 5.0F, 5.0F, 3.0F)
-                        .texOffs(161, 95).addBox(-4.0F, -13.0F, -37.0F, 8.0F, 9.0F, 3.0F)
-                        .texOffs(141, 112).addBox(-3.5F, -4.0F, -23.0F, 7.0F, 2.0F, 7.0F)
-                        .texOffs(184, 95).addBox(-2.5F, -2.0F, -22.0F, 5.0F, 5.0F, 5.0F)
-                        .texOffs(50, 133).addBox(-0.5F, -1.0F, -23.0F, 2.0F, 3.0F, 1.0F)
-                        .texOffs(187, 133).addBox(-1.5F, 1.0F, -23.0F, 1.0F, 1.0F, 1.0F)
-                        .texOffs(162, 123).addBox(-0.5F, -9.0F, -44.0F, 1.0F, 1.0F, 6.0F)
-                        .texOffs(19, 76).addBox(7.0F, -15.0F, -13.0F, 15.0F, 2.0F, 15.0F)
-                        .texOffs(0, 95).addBox(22.0F, -15.0F, -12.0F, 16.0F, 2.0F, 14.0F)
-                        .texOffs(205, 95).addBox(38.0F, -15.0F, -10.0F, 15.0F, 2.0F, 8.0F)
-                        .texOffs(182, 123).addBox(38.0F, -14.0F, -2.0F, 15.0F, 1.0F, 4.0F)
-                        .texOffs(0, 112).addBox(53.0F, -16.0F, -9.0F, 15.0F, 2.0F, 8.0F)
-                        .texOffs(57, 133).addBox(53.0F, -15.0F, -1.0F, 15.0F, 1.0F, 3.0F)
-                        .texOffs(80, 76).addBox(-22.0F, -15.0F, -13.0F, 15.0F, 2.0F, 15.0F)
-                        .texOffs(61, 95).addBox(-38.0F, -15.0F, -12.0F, 16.0F, 2.0F, 14.0F)
-                        .texOffs(47, 112).addBox(-53.0F, -15.0F, -10.0F, 15.0F, 2.0F, 8.0F)
-                        .texOffs(0, 133).addBox(-53.0F, -14.0F, -2.0F, 15.0F, 1.0F, 4.0F)
-                        .texOffs(94, 112).addBox(-68.0F, -16.0F, -9.0F, 15.0F, 2.0F, 8.0F)
-                        .texOffs(94, 133).addBox(-68.0F, -15.0F, -1.0F, 15.0F, 1.0F, 3.0F)
+                        .texOffs(175, 124).addBox(-2.5F, -11.0F, -40.0F, 5.0F, 5.0F, 3.0F)
+                        .texOffs(227, 95).addBox(-4.0F, -13.0F, -37.0F, 8.0F, 9.0F, 3.0F)
+                        .texOffs(209, 113).addBox(-3.5F, -4.0F, -23.0F, 7.0F, 2.0F, 7.0F)
+                        .texOffs(0, 113).addBox(-2.5F, -2.0F, -22.0F, 5.0F, 5.0F, 5.0F)
+                        .texOffs(89, 134).addBox(-0.5F, -1.0F, -23.0F, 2.0F, 3.0F, 1.0F)
+                        .texOffs(226, 134).addBox(-1.5F, 1.0F, -23.0F, 1.0F, 1.0F, 1.0F)
+                        .texOffs(192, 124).addBox(-0.5F, -9.0F, -44.0F, 1.0F, 1.0F, 6.0F)
+                        .texOffs(68, 76).addBox(7.0F, -15.0F, -13.0F, 15.0F, 2.0F, 15.0F)
+                        .texOffs(66, 95).addBox(22.0F, -15.0F, -12.0F, 16.0F, 2.0F, 14.0F)
+                        .texOffs(21, 113).addBox(38.0F, -15.0F, -10.0F, 15.0F, 2.0F, 8.0F)
+                        .texOffs(0, 134).addBox(38.0F, -14.0F, -2.0F, 15.0F, 1.0F, 4.0F)
+                        .texOffs(68, 113).addBox(53.0F, -16.0F, -9.0F, 15.0F, 2.0F, 8.0F)
+                        .texOffs(96, 134).addBox(53.0F, -15.0F, -1.0F, 15.0F, 1.0F, 3.0F)
+                        .texOffs(129, 76).addBox(-22.0F, -15.0F, -13.0F, 15.0F, 2.0F, 15.0F)
+                        .texOffs(127, 95).addBox(-38.0F, -15.0F, -12.0F, 16.0F, 2.0F, 14.0F)
+                        .texOffs(115, 113).addBox(-53.0F, -15.0F, -10.0F, 15.0F, 2.0F, 8.0F)
+                        .texOffs(39, 134).addBox(-53.0F, -14.0F, -2.0F, 15.0F, 1.0F, 4.0F)
+                        .texOffs(162, 113).addBox(-68.0F, -16.0F, -9.0F, 15.0F, 2.0F, 8.0F)
+                        .texOffs(133, 134).addBox(-68.0F, -15.0F, -1.0F, 15.0F, 1.0F, 3.0F)
                         .texOffs(0, 0).addBox(25.8F, -14.1F, -12.0F, 2.0F, 2.0F, 44.0F)
                         .texOffs(141, 47).addBox(26.0F, -23.0F, 22.0F, 2.0F, 11.0F, 9.0F)
                         .texOffs(238, 47).addBox(26.0F, -34.0F, 27.0F, 2.0F, 11.0F, 7.0F)
                         .texOffs(93, 0).addBox(-27.8F, -14.1F, -12.0F, 2.0F, 2.0F, 44.0F)
                         .texOffs(164, 47).addBox(-28.0F, -23.0F, 22.0F, 2.0F, 11.0F, 9.0F)
                         .texOffs(0, 76).addBox(-28.0F, -34.0F, 27.0F, 2.0F, 11.0F, 7.0F)
-                        .texOffs(0, 123).addBox(-28.2F, -26.0F, 23.0F, 55.0F, 1.0F, 8.0F)
+                        .texOffs(0, 124).addBox(-28.2F, -26.0F, 23.0F, 55.0F, 1.0F, 8.0F)
                         .texOffs(187, 47).addBox(-2.8F, -18.0F, -18.0F, 6.0F, 1.0F, 19.0F)
-                        .texOffs(141, 76).addBox(-6.6F, 1.0F, -19.2F, 13.0F, 1.0F, 16.0F)
-                        .texOffs(142, 133).addBox(4.9F, 0.0F, -11.7F, 1.0F, 2.0F, 1.0F)
-                        .texOffs(147, 133).addBox(-5.9F, 0.0F, -11.7F, 1.0F, 2.0F, 1.0F)
-                        .texOffs(177, 123).addBox(-0.5F, -22.8F, -4.8F, 1.0F, 6.0F, 1.0F)
-                        .texOffs(192, 133).addBox(67.0F, -15.0F, -6.0F, 1.0F, 1.0F, 1.0F)
-                        .texOffs(197, 133).addBox(-68.0F, -15.0F, -6.0F, 1.0F, 1.0F, 1.0F)
-                        .texOffs(122, 95).addBox(-5.5F, -13.0F, 2.0F, 11.0F, 8.0F, 8.0F)
-                        .texOffs(127, 123).addBox(4.5F, -12.0F, 3.0F, 1.0F, 6.0F, 3.0F)
-                        .texOffs(136, 123).addBox(-5.5F, -12.0F, 3.0F, 1.0F, 6.0F, 3.0F)
-                        .texOffs(131, 133).addBox(-1.0F, -5.0F, 7.0F, 2.0F, 1.0F, 3.0F),
+                        .texOffs(190, 76).addBox(-6.6F, 1.0F, -19.2F, 13.0F, 1.0F, 16.0F)
+                        .texOffs(181, 134).addBox(4.9F, 0.0F, -11.7F, 1.0F, 2.0F, 1.0F)
+                        .texOffs(186, 134).addBox(-5.9F, 0.0F, -11.7F, 1.0F, 2.0F, 1.0F)
+                        .texOffs(207, 124).addBox(-0.5F, -22.8F, -4.8F, 1.0F, 6.0F, 1.0F)
+                        .texOffs(19, 76).addBox(-7.0F, -25.0F, -31.0F, 14.0F, 8.0F, 10.0F)
+                        .texOffs(127, 124).addBox(40.8F, -14.0F, -10.0F, 3.0F, 5.0F, 4.0F)
+                        .texOffs(0, 95).addBox(40.8F, -10.0F, -12.0F, 3.0F, 4.0F, 13.0F)
+                        .texOffs(212, 124).addBox(40.8F, -10.0F, 0.0F, 3.0F, 4.0F, 3.0F)
+                        .texOffs(142, 124).addBox(-43.8F, -14.0F, -10.0F, 3.0F, 5.0F, 4.0F)
+                        .texOffs(33, 95).addBox(-43.8F, -10.0F, -12.0F, 3.0F, 4.0F, 13.0F)
+                        .texOffs(225, 124).addBox(-43.8F, -10.0F, 0.0F, 3.0F, 4.0F, 3.0F)
+                        .texOffs(231, 134).addBox(67.0F, -15.0F, -6.0F, 1.0F, 1.0F, 1.0F)
+                        .texOffs(236, 134).addBox(-68.0F, -15.0F, -6.0F, 1.0F, 1.0F, 1.0F)
+                        .texOffs(188, 95).addBox(-5.5F, -13.0F, 2.0F, 11.0F, 8.0F, 8.0F)
+                        .texOffs(157, 124).addBox(4.5F, -12.0F, 3.0F, 1.0F, 6.0F, 3.0F)
+                        .texOffs(166, 124).addBox(-5.5F, -12.0F, 3.0F, 1.0F, 6.0F, 3.0F)
+                        .texOffs(170, 134).addBox(-1.0F, -5.0F, 7.0F, 2.0F, 1.0F, 3.0F),
                 PartPose.offset(0.0F, -3.0F, 0.0F));
 
         PartDefinition propeller = body.addOrReplaceChild("propeller",
                 CubeListBuilder.create()
-                        .texOffs(152, 133).addBox(-8.0F, -1.0F, 0.0F, 16.0F, 2.0F, 1.0F)
-                        .texOffs(0, 139).addBox(-18.0F, 0.0F, 0.0F, 36.0F, 1.0F, 1.0F)
-                        .texOffs(39, 133).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 2.0F),
+                        .texOffs(191, 134).addBox(-8.0F, -1.0F, 0.0F, 16.0F, 2.0F, 1.0F)
+                        .texOffs(0, 140).addBox(-18.0F, 0.0F, 0.0F, 36.0F, 1.0F, 1.0F)
+                        .texOffs(78, 134).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 2.0F),
                 PartPose.offset(-0.0F, -8.0F, 11.0F));
 
         return LayerDefinition.create(mesh, 256, 256);
@@ -1962,7 +1963,6 @@ public final class DroneLayers {
                         .texOffs(17, 29).addBox(-2.0F, -7.0F, -2.7F, 4.0F, 3.0F, 4.0F)
                         .texOffs(34, 29).addBox(-2.2F, -10.0F, -1.5F, 4.0F, 3.0F, 4.0F)
                         .texOffs(38, 10).addBox(-2.6F, -7.0F, -8.2F, 5.0F, 4.0F, 4.0F)
-                        .texOffs(45, 46).addBox(-2.6F, -5.0F, -8.0F, 5.0F, 1.0F, 2.0F)
                         .texOffs(15, 38).addBox(-4.5F, -7.0F, -4.5F, 3.0F, 4.0F, 3.0F)
                         .texOffs(18, 46).addBox(-3.5F, -4.0F, -3.5F, 1.0F, 4.0F, 1.0F)
                         .texOffs(28, 38).addBox(-4.5F, -7.0F, 1.5F, 3.0F, 4.0F, 3.0F)
@@ -2006,13 +2006,13 @@ public final class DroneLayers {
 
         PartDefinition rotor = body.addOrReplaceChild("rotor",
                 CubeListBuilder.create()
-                        .texOffs(0, 54).addBox(-7.0F, -1.0F, -3.5F, 8.0F, 1.0F, 1.0F)
+                        .texOffs(45, 46).addBox(-7.0F, -1.0F, -3.5F, 8.0F, 1.0F, 1.0F)
                         .texOffs(27, 0).addBox(-3.5F, -1.0F, -7.0F, 1.0F, 1.0F, 8.0F)
-                        .texOffs(19, 54).addBox(-7.0F, -1.0F, 2.5F, 8.0F, 1.0F, 1.0F)
+                        .texOffs(0, 54).addBox(-7.0F, -1.0F, 2.5F, 8.0F, 1.0F, 1.0F)
                         .texOffs(46, 0).addBox(-3.5F, -1.0F, -1.0F, 1.0F, 1.0F, 8.0F)
-                        .texOffs(38, 54).addBox(-1.0F, -1.0F, 2.5F, 8.0F, 1.0F, 1.0F)
+                        .texOffs(19, 54).addBox(-1.0F, -1.0F, 2.5F, 8.0F, 1.0F, 1.0F)
                         .texOffs(0, 10).addBox(2.5F, -1.0F, -1.0F, 1.0F, 1.0F, 8.0F)
-                        .texOffs(0, 57).addBox(-1.0F, -1.0F, -3.5F, 8.0F, 1.0F, 1.0F)
+                        .texOffs(38, 54).addBox(-1.0F, -1.0F, -3.5F, 8.0F, 1.0F, 1.0F)
                         .texOffs(19, 10).addBox(2.5F, -1.0F, -7.0F, 1.0F, 1.0F, 8.0F),
                 PartPose.offset(0.0F, -7.0F, 0.0F));
 
@@ -2029,7 +2029,6 @@ public final class DroneLayers {
                         .texOffs(46, 13).addBox(-3.0F, -7.0F, -4.0F, 6.0F, 3.0F, 7.0F)
                         .texOffs(38, 25).addBox(-2.6F, -10.0F, -2.0F, 5.0F, 3.0F, 5.0F)
                         .texOffs(37, 0).addBox(-3.7F, -8.0F, -10.9F, 7.0F, 5.0F, 6.0F)
-                        .texOffs(32, 35).addBox(-3.7F, -6.0F, -10.0F, 7.0F, 1.0F, 2.0F)
                         .texOffs(74, 25).addBox(-6.5F, -7.0F, -6.5F, 3.0F, 4.0F, 3.0F)
                         .texOffs(5, 35).addBox(-5.5F, -4.0F, -5.5F, 1.0F, 4.0F, 1.0F)
                         .texOffs(87, 25).addBox(-6.5F, -7.0F, 3.5F, 3.0F, 4.0F, 3.0F)
@@ -2073,13 +2072,13 @@ public final class DroneLayers {
 
         PartDefinition rotor = body.addOrReplaceChild("rotor",
                 CubeListBuilder.create()
-                        .texOffs(51, 35).addBox(-9.0F, -1.0F, -5.5F, 8.0F, 1.0F, 1.0F)
+                        .texOffs(32, 35).addBox(-9.0F, -1.0F, -5.5F, 8.0F, 1.0F, 1.0F)
                         .texOffs(73, 13).addBox(-5.5F, -1.0F, -9.0F, 1.0F, 1.0F, 8.0F)
-                        .texOffs(70, 35).addBox(-9.0F, -1.0F, 4.5F, 8.0F, 1.0F, 1.0F)
+                        .texOffs(51, 35).addBox(-9.0F, -1.0F, 4.5F, 8.0F, 1.0F, 1.0F)
                         .texOffs(92, 13).addBox(-5.5F, -1.0F, 1.0F, 1.0F, 1.0F, 8.0F)
-                        .texOffs(89, 35).addBox(1.0F, -1.0F, 4.5F, 8.0F, 1.0F, 1.0F)
+                        .texOffs(70, 35).addBox(1.0F, -1.0F, 4.5F, 8.0F, 1.0F, 1.0F)
                         .texOffs(0, 25).addBox(4.5F, -1.0F, 1.0F, 1.0F, 1.0F, 8.0F)
-                        .texOffs(108, 35).addBox(1.0F, -1.0F, -5.5F, 8.0F, 1.0F, 1.0F)
+                        .texOffs(89, 35).addBox(1.0F, -1.0F, -5.5F, 8.0F, 1.0F, 1.0F)
                         .texOffs(19, 25).addBox(4.5F, -1.0F, -9.0F, 1.0F, 1.0F, 8.0F),
                 PartPose.offset(0.0F, -7.0F, 0.0F));
 

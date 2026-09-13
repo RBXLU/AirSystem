@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraft.world.level.block.TransparentBlock;
@@ -89,10 +90,17 @@ public final class ImpactEffects {
                                        int windowRadius, @Nullable Entity source) {
         // Damage and terrain only: the visuals and the report are drawn client-side,
         // delayed by the distance to each observer.
+        //
+        // Vanilla explosion power is radius-shaped, and a warhead measured against TNT
+        // barely scratched stone. The multiplier is what a shaped charge earns over a
+        // block of gunpowder.
         level.explode(source, level.damageSources().explosion(source, null), null,
-                at.x, at.y, at.z, power, incendiary, Level.ExplosionInteraction.TNT,
+                at.x, at.y, at.z, power * AirSystemConfig.blastPower(), incendiary,
+                Level.ExplosionInteraction.TNT,
                 false, ParticleTypes.EXPLOSION, ParticleTypes.EXPLOSION_EMITTER,
                 ModSounds.SILENCE);
+
+        throwEntities(level, at, power);
 
         if (incendiary && AirSystemConfig.startFires()) {
             igniteArea(level, at, Math.max(3, (int) (power * 1.6F)));
@@ -112,6 +120,29 @@ public final class ImpactEffects {
                 ModSounds.SILENCE);
         queueShockwave(level, at, 6);
         broadcastImpact(level, at, 1.6F, false, true);
+    }
+
+    /**
+     * The blast wave itself: everything inside it is thrown outwards and upwards,
+     * hardest at the centre. Vanilla explosion knockback stops at the damage radius,
+     * which for a warhead this size is far too small to read as a shockwave.
+     */
+    private static void throwEntities(ServerLevel level, Vec3 at, float power) {
+        double radius = power * 3.0D;
+        AABB box = new AABB(at.x - radius, at.y - radius, at.z - radius,
+                at.x + radius, at.y + radius, at.z + radius);
+
+        for (Entity entity : level.getEntities((Entity) null, box, Entity::isPushable)) {
+            Vec3 away = entity.position().add(0.0D, entity.getBbHeight() * 0.5D, 0.0D).subtract(at);
+            double distance = away.length();
+            if (distance > radius || distance < 1.0E-4D) {
+                continue;
+            }
+            double falloff = 1.0D - distance / radius;
+            Vec3 push = away.scale(1.0D / distance).scale(falloff * falloff * power * 0.55D);
+            entity.setDeltaMovement(entity.getDeltaMovement().add(push.x, push.y + falloff * 0.35D, push.z));
+            entity.hurtMarked = true;
+        }
     }
 
     private static void igniteArea(ServerLevel level, Vec3 at, int radius) {

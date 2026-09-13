@@ -146,8 +146,12 @@ public final class ImpactVisuals {
         int delay = (int) (distance / AirSystemConfig.SOUND_BLOCKS_PER_TICK);
         if (distance < 48.0D) {
             PENDING.add(new DelayedSound(at, ModSounds.EXPLOSION_NEAR.get(),
-                    Math.min(1.0F + power * 0.3F, 4.0F), 0.9F + (float) Math.random() * 0.2F, delay));
-            PENDING.add(new DelayedSound(at, ModSounds.DEBRIS_FALL.get(), 1.4F, 1.0F, delay + 14));
+                    Math.min(2.0F + power * 0.6F, 8.0F), 0.9F + (float) Math.random() * 0.2F, delay));
+            // The low boom under the crack: one sample cannot carry both without
+            // sounding thin at the top or muffled at the bottom.
+            PENDING.add(new DelayedSound(at, ModSounds.EXPLOSION_DISTANT.get(),
+                    Math.min(1.5F + power * 0.4F, 6.0F), 0.75F, delay + 1));
+            PENDING.add(new DelayedSound(at, ModSounds.DEBRIS_FALL.get(), 1.8F, 1.0F, delay + 14));
         } else {
             float volume = (float) Mth.clamp(6.0D - distance / 60.0D, 1.0D, 6.0D);
             PENDING.add(new DelayedSound(at, ModSounds.EXPLOSION_DISTANT.get(), volume, 0.8F, delay));
@@ -250,20 +254,40 @@ public final class ImpactVisuals {
     }
 
     private static void smokeColumn(ClientLevel level, Blast blast) {
-        int puffs = Math.max(1, (int) (blast.power * 0.9F * blast.detail));
+        int puffs = Math.max(2, (int) (blast.power * 2.4F * blast.detail));
         double rise = blast.age * 0.07D;
-        double spread = blast.power * (0.22D + blast.age * 0.006D);
+        double spread = blast.power * (0.30D + blast.age * 0.008D);
 
         for (int i = 0; i < puffs; i++) {
             double angle = level.random.nextDouble() * Math.PI * 2.0D;
             double offset = level.random.nextDouble() * spread;
-            level.addParticle(ParticleTypes.LARGE_SMOKE,
-                    blast.at.x + Math.cos(angle) * offset,
-                    blast.at.y + 0.6D + rise,
-                    blast.at.z + Math.sin(angle) * offset,
-                    Math.cos(angle) * 0.01D,
+            double x = blast.at.x + Math.cos(angle) * offset;
+            double z = blast.at.z + Math.sin(angle) * offset;
+            double y = blast.at.y + 0.6D + rise * level.random.nextDouble();
+
+            level.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z,
+                    Math.cos(angle) * 0.015D,
                     0.06D + level.random.nextDouble() * 0.05D,
-                    Math.sin(angle) * 0.01D);
+                    Math.sin(angle) * 0.015D);
+
+            // A second, slower layer is what gives the column body instead of a thin wisp.
+            if (i % 2 == 0) {
+                level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, x, y, z,
+                        0.0D, 0.02D + level.random.nextDouble() * 0.03D, 0.0D);
+            }
+        }
+
+        if (blast.age < 26) {
+            int flames = Math.max(1, (int) (blast.power * 0.8F * blast.detail));
+            for (int i = 0; i < flames; i++) {
+                double angle = level.random.nextDouble() * Math.PI * 2.0D;
+                double offset = level.random.nextDouble() * spread * 0.6D;
+                level.addParticle(ParticleTypes.FLAME,
+                        blast.at.x + Math.cos(angle) * offset,
+                        blast.at.y + 0.4D + level.random.nextDouble() * rise * 0.5D,
+                        blast.at.z + Math.sin(angle) * offset,
+                        0.0D, 0.05D + level.random.nextDouble() * 0.06D, 0.0D);
+            }
         }
 
         if (blast.incendiary && blast.age % 3 == 0) {

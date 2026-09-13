@@ -4,6 +4,8 @@ import com.rbxlu.airsystem.AirSystem;
 import com.rbxlu.airsystem.content.alarm.AirRaidSirenBlock;
 import com.rbxlu.airsystem.content.alarm.AlarmButtonBlock;
 import com.rbxlu.airsystem.content.drone.DroneBlock;
+import com.rbxlu.airsystem.content.net.DroneNetBlock;
+import com.rbxlu.airsystem.content.net.NetMountBlock;
 import com.rbxlu.airsystem.content.radar.RadarBlock;
 import com.rbxlu.airsystem.content.radar.RadarScreenBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -59,6 +61,22 @@ public final class ModBlocks {
                     .sound(SoundType.METAL)
                     .noOcclusion()
                     .lightLevel(state -> 6)));
+
+    public static final DeferredHolder<Block, NetMountBlock> NET_MOUNT = BLOCKS.register("net_mount",
+            () -> new NetMountBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .strength(2.0F, 4.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+
+    public static final DeferredHolder<Block, DroneNetBlock> DRONE_NET = BLOCKS.register("drone_net",
+            () -> new DroneNetBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.TERRACOTTA_GRAY)
+                    .strength(1.0F, 2.0F)
+                    .sound(SoundType.WOOL)
+                    .noOcclusion()
+                    .isViewBlocking((state, level, pos) -> false)
+                    .isSuffocating((state, level, pos) -> false)));
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);

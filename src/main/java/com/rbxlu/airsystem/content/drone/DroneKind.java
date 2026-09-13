@@ -190,6 +190,14 @@ public enum DroneKind {
         return Math.max(0.35F, cruiseSpeed * 0.5F);
     }
 
+    /** Multirotors hover down onto the pad; everything else has to fly an approach. */
+    public boolean isMultirotor() {
+        return switch (this) {
+            case PD_2, FPV_7, FPV_10, FPV_SCOUT, VAMPIRE -> true;
+            default -> false;
+        };
+    }
+
     public String getTranslationKey() {
         return "entity." + AirSystem.MODID + "." + id;
     }

@@ -32,6 +32,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RenderFrameEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -48,6 +49,7 @@ public class AirSystemClient {
 
         NeoForge.EVENT_BUS.addListener(AirSystemClient::onClientTick);
         NeoForge.EVENT_BUS.addListener(ScreenShakeHandler::onCameraAngles);
+        NeoForge.EVENT_BUS.addListener(AirSystemClient::onCameraSetup);
         NeoForge.EVENT_BUS.addListener(BlastOverlay::onComputeFov);
         NeoForge.EVENT_BUS.addListener(TracerRenderer::render);
         NeoForge.EVENT_BUS.addListener(DroneFlightRenderer::render);
@@ -110,8 +112,28 @@ public class AirSystemClient {
         if (drone == null) {
             return;
         }
-        minecraft.player.setPos(drone.position().x, drone.position().y, drone.position().z);
         minecraft.player.setDeltaMovement(Vec3.ZERO);
+    }
+
+    /**
+     * Snapshots arrive every other tick, so a camera moved once per tick advances in
+     * uneven steps and visibly judders. Placing it per frame, at the same interpolated
+     * point the model is drawn at, keeps the view steady between snapshots.
+     */
+    private static void onCameraSetup(RenderFrameEvent.Pre event) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.player == null || !(minecraft.screen instanceof DroneFeedScreen feed)) {
+            return;
+        }
+        ClientDroneStore.ClientDrone drone = feed.drone();
+        if (drone == null) {
+            return;
+        }
+        Vec3 at = drone.lerpPosition(event.getPartialTick().getGameTimeDeltaPartialTick(false));
+        minecraft.player.setPos(at.x, at.y, at.z);
+        minecraft.player.xOld = at.x;
+        minecraft.player.yOld = at.y;
+        minecraft.player.zOld = at.z;
     }
 
     private static void tickTurretControl(Minecraft minecraft) {

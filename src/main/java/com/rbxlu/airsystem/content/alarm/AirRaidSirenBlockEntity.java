@@ -183,7 +183,11 @@ public class AirRaidSirenBlockEntity extends BlockEntity {
         active = tag.getBoolean("Active");
         allClear = tag.getBoolean("AllClear");
         timer = tag.getInt("Timer");
-        remaining = tag.getInt("Remaining");
+        // Zero means "until all-clear", so a world saved before this field existed
+        // would otherwise reload into an alert that never stops.
+        remaining = tag.contains("Remaining")
+                ? tag.getInt("Remaining")
+                : AirSystemConfig.alertDurationTicks();
     }
 
     @Override

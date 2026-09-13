@@ -16,6 +16,10 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
+import com.rbxlu.airsystem.content.net.DroneNetBlock;
+import com.rbxlu.airsystem.registry.ModBlocks;
+import net.minecraft.core.Direction;
+
 import java.util.UUID;
 
 // Run with: gradle runGameTestServer
@@ -25,8 +29,13 @@ public class DroneFlightTests {
     private static final String ARENA = "empty";
 
     private static DroneFlight flightAbove(GameTestHelper helper, DroneKind kind, BlockPos target) {
+        return flightAbove(helper, kind, target, 0.0F);
+    }
+
+    private static DroneFlight flightAbove(GameTestHelper helper, DroneKind kind, BlockPos target,
+                                           float yaw) {
         Vec3 start = Vec3.atCenterOf(helper.absolutePos(BlockPos.ZERO)).add(0.0D, 120.0D, 0.0D);
-        DroneFlight flight = new DroneFlight(UUID.randomUUID(), 1, kind, start, 0.0F);
+        DroneFlight flight = new DroneFlight(UUID.randomUUID(), 1, kind, start, yaw);
         flight.setTarget(target);
         flight.setCruiseAltitude((int) start.y);
         flight.setState(DroneState.CRUISE);
@@ -60,6 +69,55 @@ public class DroneFlightTests {
         helper.assertTrue(after < before - 60.0D,
                 "drone must close on the target: was %.1f, now %.1f".formatted(before, after));
         helper.succeed();
+    }
+
+    @GameTest(template = ARENA, timeoutTicks = 200)
+    public static void netStopsLightDroneAndNotHeavyOne(GameTestHelper helper) {
+        ServerLevel level = helper.getLevel();
+        DroneFlightManager manager = DroneFlightManager.get(level);
+
+        BlockPos target = targetFor(helper);
+        Vec3 start = Vec3.atCenterOf(helper.absolutePos(BlockPos.ZERO)).add(0.0D, 120.0D, 0.0D);
+
+        BlockPos centre = BlockPos.containing(start).offset(14, 0, 0);
+        level.setBlockAndUpdate(centre.offset(0, -4, 0), ModBlocks.NET_MOUNT.get().defaultBlockState());
+        for (int dz = -10; dz <= 10; dz++) {
+            for (int dy = -3; dy <= 3; dy++) {
+                level.setBlockAndUpdate(centre.offset(0, dy, dz),
+                        ModBlocks.DRONE_NET.get().defaultBlockState()
+                                .setValue(DroneNetBlock.AXIS, Direction.Axis.Z));
+            }
+        }
+        BlockPos screen = centre;
+
+        // Both start already pointing at the screen: a turning run would drift out of it.
+        DroneFlight light = flightAbove(helper, DroneKind.FPV_7, target, -90.0F);
+        for (int i = 0; i < 90 && light.isAlive(); i++) {
+            light.tick(level, manager);
+        }
+        helper.assertTrue(!light.isAlive(), "netting must bring down an FPV airframe");
+        helper.assertTrue(countNet(level, centre) == 147,
+                "netting must survive catching something light");
+
+        DroneFlight heavy = flightAbove(helper, DroneKind.SHAHED_136, target, -90.0F);
+        for (int i = 0; i < 90 && heavy.isAlive(); i++) {
+            heavy.tick(level, manager);
+        }
+        helper.assertTrue(heavy.isAlive(), "a Shahed must tear through netting, not be stopped by it");
+        helper.assertTrue(countNet(level, centre) < 147, "the panel it tore through must be gone");
+        helper.succeed();
+    }
+
+    private static int countNet(ServerLevel level, BlockPos centre) {
+        int total = 0;
+        for (int dz = -10; dz <= 10; dz++) {
+            for (int dy = -3; dy <= 3; dy++) {
+                if (level.getBlockState(centre.offset(0, dy, dz)).getBlock() instanceof DroneNetBlock) {
+                    total++;
+                }
+            }
+        }
+        return total;
     }
 
     @GameTest(template = ARENA, timeoutTicks = 200)

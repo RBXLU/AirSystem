@@ -59,6 +59,10 @@ public final class ModItems {
             () -> new BlockItem(ModBlocks.RADAR.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> RADAR_SCREEN = ITEMS.register("radar_screen",
             () -> new BlockItem(ModBlocks.RADAR_SCREEN.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> NET_MOUNT = ITEMS.register("net_mount",
+            () -> new BlockItem(ModBlocks.NET_MOUNT.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> DRONE_NET = ITEMS.register("drone_net",
+            () -> new BlockItem(ModBlocks.DRONE_NET.get(), new Item.Properties()));
 
     static {
         for (DroneKind kind : DroneKind.values()) {

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "airsystem:block/net_mount"
+    },
+    "facing=east": {
+      "model": "airsystem:block/net_mount",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "airsystem:block/net_mount",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "airsystem:block/net_mount",
+      "y": 270
+    }
+  }
+}

@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -39,6 +40,10 @@ public class DroneFlight {
     private float yaw;
     private float pitch;
     private float roll;
+
+    private static final int SPOOL_TICKS = 60;
+
+    private static final float NET_STOPS_SPAN = 2.4F;
 
     private DroneState state = DroneState.LAUNCH;
     private BlockPos target = BlockPos.ZERO;
@@ -249,7 +254,12 @@ public class DroneFlight {
 
     private void tickLaunch(ServerLevel level) {
         pitch = approach(pitch, -18.0F, 2.0F);
-        advance(level, kind.getCruiseSpeed() * 0.75F * throttle);
+
+        // An aircraft leaves the pad at a standstill and builds speed; jumping straight
+        // to cruise made every launch look like a catapult shot.
+        float spool = Mth.clamp(age / (float) SPOOL_TICKS, 0.15F, 1.0F);
+        advance(level, kind.getCruiseSpeed() * 0.75F * throttle * spool);
+
         if (position.y >= cruiseAltitude(level) - 2) {
             state = DroneState.CRUISE;
         }
@@ -357,24 +367,77 @@ public class DroneFlight {
             steer((float) (Mth.atan2(dz, dx) * (180.0D / Math.PI)) - 90.0F, turnRate() * 1.4F);
             float glide = (float) Mth.clamp(
                     Math.toDegrees(Math.atan2(height, Math.max(2.5D, horizontal))), 0.0D, 26.0D);
+
+            // Follow the skyline, not the straight line to the pad: the old glide path cut
+            // through any rise between here and home.
+            double clearance = position.y - terrainUnder(level, position) - 4.0D;
+            if (clearance < 0.0D && horizontal > 8.0D) {
+                glide = Math.min(glide, -6.0F);
+            }
             pitch = approach(pitch, glide, 3.0F);
             roll = Mth.lerp(0.25F, roll, 0.0F);
             advance(level, kind.getApproachSpeed());
             return;
         }
 
-        pitch = approach(pitch, 0.0F, 4.0F);
-        roll = Mth.lerp(0.3F, roll, 0.0F);
-        Vec3 descent = new Vec3(dx * 0.18D, -Math.min(0.28D, Math.max(0.08D, height * 0.35D)),
-                dz * 0.18D);
-        velocity = descent;
-        if (move(level, descent)) {
+        if (kind.isMultirotor()) {
+            pitch = approach(pitch, 0.0F, 4.0F);
+            roll = Mth.lerp(0.3F, roll, 0.0F);
+            Vec3 descent = new Vec3(dx * 0.18D, -Math.min(0.28D, Math.max(0.08D, height * 0.35D)),
+                    dz * 0.18D);
+            velocity = descent;
+            if (move(level, descent)) {
+                return;
+            }
+            if (position.y - (pad.getY() + 0.6D) <= 0.35D) {
+                touchDown(level, pad);
+            }
             return;
         }
 
-        if (position.y - (pad.getY() + 0.6D) <= 0.35D) {
+        // A wing needs airflow: it flares onto the pad still moving forward, rather than
+        // stopping overhead and sinking like a quadcopter. Touchdown is checked before the
+        // move, so the flare settles onto the ground instead of flying into it.
+        if (height <= 0.6D) {
             touchDown(level, pad);
+            return;
         }
+
+        pitch = approach(pitch, height > 1.5D ? 6.0F : -1.0F, 4.0F);
+        roll = Mth.lerp(0.3F, roll, 0.0F);
+
+        double sink = Math.min(0.22D, Math.max(0.07D, height * 0.30D));
+        Vec3 flare = forward().scale(kind.getApproachSpeed() * 0.55F).add(0.0D, 0.0D, 0.0D);
+        flare = new Vec3(flare.x, -sink, flare.z);
+        velocity = flare;
+        move(level, flare);
+    }
+
+    /**
+     * Netting stops what it was strung up for and nothing else: a light airframe tangles
+     * and comes down without its warhead going off, while anything with real mass tears
+     * the panel out and flies on.
+     */
+    private boolean meetNet(ServerLevel level, BlockPos net, Vec3 contact, Vec3 next) {
+        if (kind.isMultirotor() || kind.getWingspan() <= NET_STOPS_SPAN) {
+            // Tangled, not detonated: netting that blew itself up on every catch would be
+            // worth less than the string it is made of.
+            position = contact;
+            state = DroneState.DESTROYED;
+            ImpactEffects.hitSparks(level, contact);
+            level.playSound(null, net, SoundEvents.WOOL_BREAK, SoundSource.BLOCKS, 1.2F, 0.7F);
+            return true;
+        }
+
+        level.destroyBlock(net, false);
+        level.playSound(null, net, SoundEvents.WOOL_BREAK, SoundSource.BLOCKS, 1.6F, 0.5F);
+        position = next;
+        return false;
+    }
+
+    private static double terrainUnder(ServerLevel level, Vec3 point) {
+        return level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Mth.floor(point.x), Mth.floor(point.z));
     }
 
     private BlockPos findLandingPad(ServerLevel level) {
@@ -468,7 +531,20 @@ public class DroneFlight {
                 ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty()));
 
         if (hit.getType() != HitResult.Type.MISS) {
+            if (level.getBlockState(hit.getBlockPos()).getBlock()
+                    instanceof com.rbxlu.airsystem.content.net.DroneNetBlock) {
+                return meetNet(level, hit.getBlockPos(), hit.getLocation(), next);
+            }
+
             position = hit.getLocation();
+
+            // Touching the ground on a gentle approach is a landing, not a crash. Without
+            // this a wing that met a rise short of its pad blew up on it.
+            if (state == DroneState.LANDING && motion.y > -0.35D && canLand()) {
+                touchDown(level, landingPad != null ? landingPad : home);
+                return true;
+            }
+
             detonate(level, position);
             return true;
         }

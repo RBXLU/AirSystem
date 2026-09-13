@@ -148,9 +148,10 @@ public class RadarScreen extends Screen {
                     : Component.translatable(contact.sizeClass().key());
             graphics.drawString(font, name, x, row, contact.friendly() ? FRIENDLY : HOSTILE, false);
             graphics.drawString(font, Component.translatable("screen.airsystem.radar.track",
-                            bearing, distance, (int) contact.y()), x, row + 10, TEXT, false);
-            graphics.drawString(font, Component.translatable("screen.airsystem.radar.speed",
-                            (int) (contact.speed() * 72.0F)), x, row + 20, TEXT, false);
+                            bearing, distance), x, row + 10, TEXT, false);
+            graphics.drawString(font, Component.translatable("screen.airsystem.radar.altitude",
+                            (int) contact.y(), (int) (contact.speed() * 72.0F)),
+                    x, row + 20, TEXT, false);
             row += 34;
         }
 

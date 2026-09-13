@@ -72,6 +72,10 @@ public final class AirSystemConfig {
                     + " 0 means it sounds until all-clear or a second press")
             .defineInRange("alarm.alertDuration", 90, 0, 3600);
 
+    private static final ModConfigSpec.DoubleValue BLAST_POWER = BUILDER
+            .comment("Multiplier on warhead power against terrain; 1.0 matches plain TNT")
+            .defineInRange("impact.blastPower", 2.2D, 0.2D, 8.0D);
+
     private static final ModConfigSpec.IntValue RADAR_RANGE = BUILDER
             .comment("Radar station detection range, in blocks")
             .defineInRange("radar.range", 320, 64, 2048);
@@ -152,6 +156,10 @@ public final class AirSystemConfig {
 
     public static int alertDurationTicks() {
         return (loaded ? ALERT_DURATION.get() : 90) * 20;
+    }
+
+    public static float blastPower() {
+        return loaded ? BLAST_POWER.get().floatValue() : 2.2F;
     }
 
     public static int radarRange() {
